@@ -121,7 +121,6 @@
 }
 
 #pragma mark 代理滚动方法
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     _page.currentPage = scrollView.contentOffset.x / scrollView.frame.size.width;
 }

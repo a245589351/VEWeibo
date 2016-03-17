@@ -7,7 +7,8 @@
 //  主界面
 
 #import <UIKit/UIKit.h>
+#import "DockController.h"
 
-@interface MainController : UIViewController
+@interface MainController : DockController
 
 @end
