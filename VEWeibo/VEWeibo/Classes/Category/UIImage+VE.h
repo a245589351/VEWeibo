@@ -11,4 +11,7 @@
 @interface UIImage (VE)
 #pragma mark 加载全屏图片
 + (UIImage *)fullScreenImage:(NSString *)imgName;
+
+#pragma mark 自由拉伸的图片
++ (UIImage *)resizedImage:(NSString *)imgName;
 @end

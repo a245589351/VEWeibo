@@ -56,7 +56,7 @@
     [self addChildViewController:navSquare];
     
     // 5.更多
-    MoreController *more = [[MoreController alloc] init];
+    MoreController *more = [[MoreController alloc] initWithStyle:UITableViewStyleGrouped];
     WBNavigationController *navMore = [[WBNavigationController alloc] initWithRootViewController:more];
     [self addChildViewController:navMore];
 }
