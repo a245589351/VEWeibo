@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "NewfeatureController.h"
 #import "MainController.h"
+#import "OauthController.h"
+#import "AccountTool.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     NSString *key = (NSString *)kCFBundleVersionKey;
     // 1.从Info.plist中取出版本号
     NSString *version = [NSBundle mainBundle].infoDictionary[key];
@@ -29,7 +32,11 @@
         // 显示状态栏
         application.statusBarHidden = NO;
         
-        self.window.rootViewController = [[MainController alloc] init];
+        if ([AccountTool sharedAccountTool].currentAccount) {
+            self.window.rootViewController = [[MainController alloc] init];
+        } else {
+            self.window.rootViewController = [[OauthController alloc] init];
+        }
     } else { // 版本号不一样：第一次使用该版本
         // 将新版本号写入沙盒
         [[NSUserDefaults standardUserDefaults] setObject:version forKey:key];

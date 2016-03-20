@@ -8,7 +8,7 @@
 
 #import "NewfeatureController.h"
 #import "UIImage+VE.h"
-#import "MainController.h"
+#import "OauthController.h"
 
 #define kCount 4
 
@@ -112,7 +112,7 @@
 - (void)start {
     MyLog(@"开始微博");
     [UIApplication sharedApplication].statusBarHidden = NO;
-    self.view.window.rootViewController = [[MainController alloc] init];
+    self.view.window.rootViewController = [[OauthController alloc] init];
 }
 
 #pragma mark 分享

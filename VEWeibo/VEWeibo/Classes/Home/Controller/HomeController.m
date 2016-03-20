@@ -8,8 +8,14 @@
 
 #import "HomeController.h"
 #import "UIBarButtonItem+VE.h"
+#import "StatusTool.h"
+#import "AccountTool.h"
+#import "Status.h"
+#import "User.h"
 
-@interface HomeController ()
+@interface HomeController () {
+    NSMutableArray *_statuses;
+}
 
 @end
 
@@ -18,6 +24,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 1.设置界面属性
+    [self buildUI];
+    
+    // 2.获得用户的微博数据
+    [self loadStatusData];
+    
+}
+
+#pragma mark - 设置界面属性
+- (void)buildUI {
     // 1.设置标题
     self.title = @"首页";
     self.view.backgroundColor = [UIColor whiteColor];
@@ -27,7 +43,19 @@
     
     // 3.右边的item
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"navigationbar_pop.png" highLightedIcon:@"navigationbar_pop_highlighted.png" addTarget:self action:@selector(sendStatus)];
-    
+}
+
+#pragma mark - 获得用户的微博数据
+- (void)loadStatusData {
+    _statuses = [NSMutableArray array];
+    // 发送请求
+    [StatusTool statusesWithSuccess:^(NSArray *statuses) {
+        [_statuses addObjectsFromArray:statuses];
+        
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark 发送微博
@@ -41,69 +69,24 @@
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return _statuses.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    Status *s = _statuses[indexPath.row];
+    
+    cell.textLabel.text = s.text;
+    cell.detailTextLabel.text = s.user.screenName;
     
     return cell;
 }
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
