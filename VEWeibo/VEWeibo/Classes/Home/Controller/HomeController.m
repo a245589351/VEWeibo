@@ -12,6 +12,9 @@
 #import "AccountTool.h"
 #import "Status.h"
 #import "User.h"
+#import "UIImageView+WebCache.h"
+#import "StatusCellFrame.h"
+#import "StatusCell.h"
 
 @interface HomeController () {
     NSMutableArray *_statuses;
@@ -75,18 +78,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    Status *s = _statuses[indexPath.row];
-    
-    cell.textLabel.text = s.text;
-    cell.detailTextLabel.text = s.user.screenName;
+    StatusCellFrame *f = [[StatusCellFrame alloc] init];
+    f.status = _statuses[indexPath.row];
+    cell.statusCellFrame = f;
     
     return cell;
+}
+
+#pragma mark - 返回每一行cell的高度
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    StatusCellFrame *f = [[StatusCellFrame alloc] init];
+    f.status = _statuses[indexPath.row];
+    return f.cellHeight;
 }
 
 @end
