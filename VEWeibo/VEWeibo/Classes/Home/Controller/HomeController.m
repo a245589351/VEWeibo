@@ -17,7 +17,7 @@
 #import "StatusCell.h"
 
 @interface HomeController () {
-    NSMutableArray *_statuses;
+    NSMutableArray *_statuseFrames;
 }
 
 @end
@@ -50,11 +50,17 @@
 
 #pragma mark - 获得用户的微博数据
 - (void)loadStatusData {
-    _statuses = [NSMutableArray array];
+    _statuseFrames = [NSMutableArray array];
     // 发送请求
     [StatusTool statusesWithSuccess:^(NSArray *statuses) {
-        [_statuses addObjectsFromArray:statuses];
+        // 1.在拿到最新微博数据的同时计算它的frame
+        for (Status *s in statuses) {
+            StatusCellFrame *f = [[StatusCellFrame alloc] init];
+            f.status = s;
+            [_statuseFrames addObject:f];
+        }
         
+        // 2.刷新表格
         [self.tableView reloadData];
     } failure:^(NSError *error) {
         
@@ -73,7 +79,7 @@
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _statuses.count;
+    return _statuseFrames.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,18 +90,15 @@
         cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    StatusCellFrame *f = [[StatusCellFrame alloc] init];
-    f.status = _statuses[indexPath.row];
-    cell.statusCellFrame = f;
+    cell.statusCellFrame = _statuseFrames[indexPath.row];
     
     return cell;
 }
 
+#pragma mark - TableView delegate
 #pragma mark - 返回每一行cell的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    StatusCellFrame *f = [[StatusCellFrame alloc] init];
-    f.status = _statuses[indexPath.row];
-    return f.cellHeight;
+    return [_statuseFrames[indexPath.row] cellHeight];
 }
 
 @end
