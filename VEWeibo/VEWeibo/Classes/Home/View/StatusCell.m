@@ -59,8 +59,9 @@
     [self.contentView addSubview:_mbIcon];
     
     // 3.时间
-    _time      = [[UILabel alloc] init];
-    _time.font = kTimeFont;
+    _time           = [[UILabel alloc] init];
+    _time.font      = kTimeFont;
+    _time.textColor = kColor(246, 165, 68);
     [self.contentView addSubview:_time];
     
     // 4.来源
@@ -125,12 +126,18 @@
     }
     
     // 3.时间
-    _time.frame = statusCellFrame.timeFrame;
-    _time.text  = s.createdAt;
+    _time.text      = s.createdAt;
+    CGFloat timeX   = statusCellFrame.screenNameFrame.origin.x;
+    CGFloat timeY   = CGRectGetMaxY(statusCellFrame.screenNameFrame) + kCellBorderWidth;
+    CGSize timeSize = [_time.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kTimeFont, NSFontAttributeName, nil]];
+    _time.frame     = (CGRect){{timeX, timeY}, timeSize};
     
     // 4.来源
-    _source.frame = statusCellFrame.sourceFrame;
-    _source.text  = s.source;
+    _source.text      = s.source;
+    CGFloat sourceX   = CGRectGetMaxX(statusCellFrame.timeFrame) + kCellBorderWidth;
+    CGFloat sourceY   = timeY;
+    CGSize sourceSize = [_source.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kSourceFont, NSFontAttributeName, nil]];
+    _source.frame     = (CGRect){{sourceX, sourceY}, sourceSize};
     
     // 5.内容
     _text.frame = statusCellFrame.textFrame;

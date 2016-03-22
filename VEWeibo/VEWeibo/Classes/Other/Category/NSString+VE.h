@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (VE)
+// 追加字符串
 - (NSString *)fileAppend:(NSString *)append;
+
+// 取出html标签
++ (NSString *)filterHTML:(NSString *)html;
 @end
