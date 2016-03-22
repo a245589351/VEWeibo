@@ -9,6 +9,7 @@
 #import "StatusCellFrame.h"
 #import "Status.h"
 #import "User.h"
+#import "IconView.h"
 
 @implementation StatusCellFrame
 - (void)setStatus:(Status *)status {
@@ -21,15 +22,23 @@
     NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
     
     // 1.头像
-    CGFloat iconX = kCellBorderWidth;
-    CGFloat iconY = kCellBorderWidth;
-    _iconFrame    = CGRectMake(iconX, iconY, 50, 50);
+    CGFloat iconX   = kCellBorderWidth;
+    CGFloat iconY   = kCellBorderWidth;
+    CGSize iconSize = [IconView iconSizeWithType:kIconTypeSmall];
+    _iconFrame      = (CGRect){{iconX, iconY}, iconSize};
 
     // 2.昵称
     CGFloat screenNameX   = CGRectGetMaxX(_iconFrame) + kCellBorderWidth;
     CGFloat screenNameY   = iconY;
     CGSize screenNameSize = [status.user.screenName sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kScreenNameFont, NSFontAttributeName, nil]];
     _screenNameFrame = (CGRect){{screenNameX, screenNameY}, screenNameSize};
+    
+    // 会员图标
+    if (status.user.mbtype != kMBTypeNone) {
+        CGFloat mbIconX = CGRectGetMaxX(_screenNameFrame) + kCellBorderWidth;
+        CGFloat mbIconY = screenNameY + (screenNameSize.height - kMBIconH) * 0.5;
+        _mbIconFrame    = CGRectMake(mbIconX, mbIconY, kMBIconW, kMBIconH);
+    }
     
     // 3.时间
     CGFloat timeX   = screenNameX;
@@ -45,18 +54,18 @@
     
     // 5.内容
     CGFloat textX   = iconX;
-    CGFloat textY   = CGRectGetMaxY(_sourceFrame) + kCellBorderWidth;
+    CGFloat textY   = MAX(CGRectGetMaxY(_sourceFrame), CGRectGetMaxY(_iconFrame)) + kCellBorderWidth;
     CGSize textSize = [status.text boundingRectWithSize:CGSizeMake(cellWidth - kCellBorderWidth * 2, MAXFLOAT) options:options attributes:[NSDictionary dictionaryWithObjectsAndKeys:kTextFont, NSFontAttributeName, nil] context:nil].size;
     _textFrame = (CGRect){{textX, textY}, textSize};
     
     if (status.picUrls.count) { // 6.有配图
         CGFloat imageX = textX;
         CGFloat imageY = CGRectGetMaxY(_textFrame) + kCellBorderWidth;
-        _imageFrame = CGRectMake(imageX, imageY, 100, 100);
+        _imageFrame    = CGRectMake(imageX, imageY, 100, 100);
     } else if (status.retweetedStatus) { // 7.有被转发的微博
         // 被转发微博整体
-        CGFloat retweetedX = textX;
-        CGFloat retweetedY = CGRectGetMaxY(_textFrame) + kCellBorderWidth;
+        CGFloat retweetedX      = textX;
+        CGFloat retweetedY      = CGRectGetMaxY(_textFrame) + kCellBorderWidth;
         CGFloat retweetedWidth  = cellWidth - 2 * kCellBorderWidth;
         CGFloat retweetedHeight = kCellBorderWidth;
         

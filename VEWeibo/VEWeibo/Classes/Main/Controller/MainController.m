@@ -36,27 +36,27 @@
 #pragma marks 初始化所有子控制器
 - (void)addAllChildController {
     // 1.首页
-    HomeController *home = [[HomeController alloc] init];
+    HomeController *home            = [[HomeController alloc] init];
     WBNavigationController *navHome = [[WBNavigationController alloc] initWithRootViewController:home];
     [self addChildViewController:navHome];
     
     // 2.消息
-    UIViewController *msg = [[MessageController alloc] init];
+    UIViewController *msg          = [[MessageController alloc] init];
     WBNavigationController *navMsg = [[WBNavigationController alloc] initWithRootViewController:msg];
     [self addChildViewController:navMsg];
     
     // 3.我
-    UIViewController *me = [[MeController alloc] init];
+    UIViewController *me          = [[MeController alloc] init];
     WBNavigationController *navMe = [[WBNavigationController alloc] initWithRootViewController:me];
     [self addChildViewController:navMe];
     
     // 4.广场
-    UIViewController *square = [[SquareController alloc] init];
+    UIViewController *square          = [[SquareController alloc] init];
     WBNavigationController *navSquare = [[WBNavigationController alloc] initWithRootViewController:square];
     [self addChildViewController:navSquare];
     
     // 5.更多
-    MoreController *more = [[MoreController alloc] initWithStyle:UITableViewStyleGrouped];
+    MoreController *more            = [[MoreController alloc] initWithStyle:UITableViewStyleGrouped];
     WBNavigationController *navMore = [[WBNavigationController alloc] initWithRootViewController:more];
     [self addChildViewController:navMore];
 }

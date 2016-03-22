@@ -45,9 +45,9 @@
     
     // 1.取出即将显示的控制器
     UIViewController *newVc = self.childViewControllers[to];
-    CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height - kDockHeight;
-    newVc.view.frame = CGRectMake(0, 0, width, height);
+    CGFloat width           = self.view.frame.size.width;
+    CGFloat height          = self.view.frame.size.height - kDockHeight;
+    newVc.view.frame        = CGRectMake(0, 0, width, height);
     
     // 2.添加新控制器的view到MainController上
     [self.view addSubview:newVc.view];

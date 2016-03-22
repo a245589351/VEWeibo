@@ -10,11 +10,13 @@
 #import "StatusCellFrame.h"
 #import "Status.h"
 #import "User.h"
+#import "IconView.h"
 #import "UIImageView+WebCache.h"
 
 @interface StatusCell () {
-    UIImageView *_icon;   // 头像
+    IconView *_icon;      // 头像
     UILabel *_screenName; // 昵称
+    UIImageView *_mbIcon; // 会员皇冠图标
     UILabel *_time;       // 时间
     UILabel *_source;     // 来源
     UILabel *_text;       // 内容
@@ -44,26 +46,30 @@
 #pragma mark - 添加微博的自控件
 - (void)addAllSubviews {
     // 1.头像
-    _icon = [[UIImageView alloc] init];
+    _icon = [[IconView alloc] init];
     [self.contentView addSubview:_icon];
     
     // 2.昵称
-    _screenName = [[UILabel alloc] init];
+    _screenName      = [[UILabel alloc] init];
     _screenName.font = kScreenNameFont;
     [self.contentView addSubview:_screenName];
     
+    // 会员图标
+    _mbIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"common_icon_membership"]];
+    [self.contentView addSubview:_mbIcon];
+    
     // 3.时间
-    _time = [[UILabel alloc] init];
+    _time      = [[UILabel alloc] init];
     _time.font = kTimeFont;
     [self.contentView addSubview:_time];
     
     // 4.来源
-    _source = [[UILabel alloc] init];
+    _source      = [[UILabel alloc] init];
     _source.font = kSourceFont;
     [self.contentView addSubview:_source];
     
     // 5.内容
-    _text = [[UILabel alloc] init];
+    _text      = [[UILabel alloc] init];
     _text.font = kTextFont;
     _text.numberOfLines = 0;
     [self.contentView addSubview:_text];
@@ -80,12 +86,12 @@
     [self.contentView addSubview:_retweeted];
     
     // 2.被转发微博的用户昵称
-    _retweetedScreenName = [[UILabel alloc] init];
+    _retweetedScreenName      = [[UILabel alloc] init];
     _retweetedScreenName.font = kRetweetedScreenNameFont;
     [_retweeted addSubview:_retweetedScreenName];
     
     // 3.被转发微博的内容
-    _retweetedText = [[UILabel alloc] init];
+    _retweetedText      = [[UILabel alloc] init];
     _retweetedText.font = kRetweetedTextFont;
     _retweetedText.numberOfLines = 0;
     [_retweeted addSubview:_retweetedText];
@@ -101,12 +107,22 @@
     Status *s = statusCellFrame.status;
     
     // 1.头像
+    _icon.type  = kIconTypeSmall;
     _icon.frame = statusCellFrame.iconFrame;
-    [_icon sd_setImageWithURL:[NSURL URLWithString:s.user.profileImageUrl] placeholderImage:[UIImage imageNamed:@"Icon.png"] options:SDWebImageRetryFailed | SDWebImageLowPriority];
+    _icon.user  = s.user;
     
     // 2.昵称
     _screenName.frame = statusCellFrame.screenNameFrame;
     _screenName.text  = s.user.screenName;
+    // 判断是不是会员
+    if (s.user.mbtype == kMBTypeNone) {
+        _screenName.textColor = kScreenNameColor;
+        _mbIcon.hidden = YES;
+    } else {
+        _screenName.textColor = kMBScreenNameColor;
+        _mbIcon.hidden = NO;
+        _mbIcon.frame = statusCellFrame.mbIconFrame;
+    }
     
     // 3.时间
     _time.frame = statusCellFrame.timeFrame;
@@ -146,8 +162,8 @@
         
         // 10.被转发微博的配图
         if (s.retweetedStatus.picUrls.count) {
-            _retweetedImage.hidden = NO;
-            _retweetedImage.frame  = statusCellFrame.retweetedImageFrame;
+            _retweetedImage.hidden   = NO;
+            _retweetedImage.frame    = statusCellFrame.retweetedImageFrame;
             NSURL *retweetedImageUrl = [NSURL URLWithString:s.retweetedStatus.picUrls[0][@"thumbnail_pic"]];
             [_retweetedImage sd_setImageWithURL:retweetedImageUrl placeholderImage:[UIImage imageNamed:@"Icon.png"] options:SDWebImageRetryFailed | SDWebImageLowPriority];
 //#warning 被转发微博的配图

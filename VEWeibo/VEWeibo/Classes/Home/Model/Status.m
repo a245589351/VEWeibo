@@ -13,8 +13,8 @@
 
 - (id)initWithDict:(NSDictionary *)dict {
     if (self == [super init]) {
-        self.text = dict[@"text"];
-        self.user = [[User alloc] initWithDict:dict[@"user"]];
+        self.text    = dict[@"text"];
+        self.user    = [[User alloc] initWithDict:dict[@"user"]];
         self.picUrls = dict[@"pic_urls"];
         
         NSDictionary *retweet = dict[@"retweeted_status"];

@@ -40,8 +40,8 @@
 
 #pragma mark 调整内部imageView的fram
 - (CGRect)imageRectForContentRect:(CGRect)contentRect {
-    CGFloat imageX = 0;
-    CGFloat imageY = 0;
+    CGFloat imageX      = 0;
+    CGFloat imageY      = 0;
     CGFloat imageWidth  = contentRect.size.width;
     CGFloat imageHeight = contentRect.size.height * (1 - kTitleRadio);
     return CGRectMake(imageX, imageY, imageWidth, imageHeight);
@@ -49,10 +49,10 @@
 
 #pragma mark 调整内部label的fram
 - (CGRect)titleRectForContentRect:(CGRect)contentRect {
-    CGFloat titleX = 0;
+    CGFloat titleX      = 0;
     CGFloat titleHeight = contentRect.size.height * kTitleRadio;
-    CGFloat titleY = contentRect.size.height - titleHeight -3;
-    CGFloat titleWidth = contentRect.size.width;
+    CGFloat titleY      = contentRect.size.height - titleHeight -3;
+    CGFloat titleWidth  = contentRect.size.width;
     return CGRectMake(titleX, titleY, titleWidth, titleHeight);
 }
 
