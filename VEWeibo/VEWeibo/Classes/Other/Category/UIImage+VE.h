@@ -14,4 +14,7 @@
 
 #pragma mark 自由拉伸的图片
 + (UIImage *)resizedImage:(NSString *)imgName;
+
+#pragma mark 自由拉伸的图片
++ (UIImage *)resizedImage:(NSString *)imgName xPost:(CGFloat)xPost yPost:(CGFloat)yPost;
 @end

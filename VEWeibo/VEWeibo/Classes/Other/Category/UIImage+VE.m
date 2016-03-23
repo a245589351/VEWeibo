@@ -21,7 +21,11 @@
 
 #pragma mark 自由拉伸的图片
 + (UIImage *)resizedImage:(NSString *)imgName {
+    return [self resizedImage:imgName xPost:0.5 yPost:0.5];
+}
+
++ (UIImage *)resizedImage:(NSString *)imgName xPost:(CGFloat)xPost yPost:(CGFloat)yPost {
     UIImage *image = [UIImage imageNamed:imgName];
-    return [image stretchableImageWithLeftCapWidth:image.size.width * 0.5 topCapHeight:image.size.height * 0.5];
+    return [image stretchableImageWithLeftCapWidth:image.size.width * xPost topCapHeight:image.size.height * yPost];
 }
 @end

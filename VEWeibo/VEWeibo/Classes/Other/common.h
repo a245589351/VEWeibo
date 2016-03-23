@@ -43,6 +43,8 @@
 #define kMBScreenNameColor kColor(243, 101, 18)
 // 非会员昵称颜色
 #define kScreenNameColor kColor(93, 93, 93)
+// 被转发微博昵称颜色
+#define kRetweetedScreenNameColor kColor(63, 104, 161)
 
 // 7.图片尺寸
 // 头像
@@ -62,3 +64,6 @@
 // 会员皇冠图标
 #define kMBIconW 14
 #define kMBIconH 14
+
+// 8.被转发微博的背景颜色
+#define kRetweetedBackgroundColor kColor(246, 246, 246)

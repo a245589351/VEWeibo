@@ -12,20 +12,21 @@
 #import "User.h"
 #import "IconView.h"
 #import "UIImageView+WebCache.h"
+#import "ImageListView.h"
 
 @interface StatusCell () {
-    IconView *_icon;      // 头像
-    UILabel *_screenName; // 昵称
-    UIImageView *_mbIcon; // 会员皇冠图标
-    UILabel *_time;       // 时间
-    UILabel *_source;     // 来源
-    UILabel *_text;       // 内容
-    UIImageView *_image;  // 配图
+    IconView *_icon;       // 头像
+    UILabel *_screenName;  // 昵称
+    UIImageView *_mbIcon;  // 会员皇冠图标
+    UILabel *_time;        // 时间
+    UILabel *_source;      // 来源
+    UILabel *_text;        // 内容
+    ImageListView *_image; // 配图
     
-    UIImageView *_retweeted;       // 被添加微博的父控件
-    UILabel *_retweetedScreenName; // 被转发微博的用户昵称
-    UILabel *_retweetedText;       // 被转发微博的内容
-    UIImageView *_retweetedImage;  // 被转发微博的配图
+    UIImageView *_retweeted;        // 被添加微博的父控件
+    UILabel *_retweetedScreenName;  // 被转发微博的用户昵称
+    UILabel *_retweetedText;        // 被转发微博的内容
+    ImageListView *_retweetedImage; // 被转发微博的配图
 }
 
 @end
@@ -76,7 +77,7 @@
     [self.contentView addSubview:_text];
     
     // 6.配图
-    _image = [[UIImageView alloc] init];
+    _image = [[ImageListView alloc] init];
     [self.contentView addSubview:_image];
 }
 
@@ -84,11 +85,13 @@
 - (void)addReWeetedAllSubviews {
     // 1.被添加微博的父控件
     _retweeted = [[UIImageView alloc] init];
+    _retweeted.backgroundColor = kRetweetedBackgroundColor;
     [self.contentView addSubview:_retweeted];
     
     // 2.被转发微博的用户昵称
-    _retweetedScreenName      = [[UILabel alloc] init];
-    _retweetedScreenName.font = kRetweetedScreenNameFont;
+    _retweetedScreenName           = [[UILabel alloc] init];
+    _retweetedScreenName.font      = kRetweetedScreenNameFont;
+    _retweetedScreenName.textColor = kRetweetedScreenNameColor;
     [_retweeted addSubview:_retweetedScreenName];
     
     // 3.被转发微博的内容
@@ -98,7 +101,7 @@
     [_retweeted addSubview:_retweetedText];
     
     // 4.被转发微博的配图
-    _retweetedImage = [[UIImageView alloc] init];
+    _retweetedImage = [[ImageListView alloc] init];
     [_retweeted addSubview:_retweetedImage];
 }
 
@@ -145,10 +148,9 @@
     
     // 6。配图
     if (s.picUrls.count) {
-        _image.hidden = NO;
-        _image.frame  = statusCellFrame.imageFrame;
-        NSURL *imageUrl = [NSURL URLWithString:s.picUrls[0][@"thumbnail_pic"]];
-        [_image sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"Icon.png"] options:SDWebImageRetryFailed | SDWebImageLowPriority];
+        _image.hidden    = NO;
+        _image.frame     = statusCellFrame.imageFrame;
+        _image.imageUrls = s.picUrls;
 //#warning 配图的图片
     } else {
         _image.hidden = YES;
@@ -161,7 +163,7 @@
         
         // 8.被转发微博昵称
         _retweetedScreenName.frame = statusCellFrame.retweetedScreenNameFrame;
-        _retweetedScreenName.text  = s.retweetedStatus.user.screenName;
+        _retweetedScreenName.text  = [NSString stringWithFormat:@"@%@", s.retweetedStatus.user.screenName];
         
         // 9.被转发微博的内容
         _retweetedText.frame = statusCellFrame.retweetedTextFrame;
@@ -169,10 +171,9 @@
         
         // 10.被转发微博的配图
         if (s.retweetedStatus.picUrls.count) {
-            _retweetedImage.hidden   = NO;
-            _retweetedImage.frame    = statusCellFrame.retweetedImageFrame;
-            NSURL *retweetedImageUrl = [NSURL URLWithString:s.retweetedStatus.picUrls[0][@"thumbnail_pic"]];
-            [_retweetedImage sd_setImageWithURL:retweetedImageUrl placeholderImage:[UIImage imageNamed:@"Icon.png"] options:SDWebImageRetryFailed | SDWebImageLowPriority];
+            _retweetedImage.hidden    = NO;
+            _retweetedImage.frame     = statusCellFrame.retweetedImageFrame;
+            _retweetedImage.imageUrls = s.retweetedStatus.picUrls;
 //#warning 被转发微博的配图
         } else {
             _retweetedImage.hidden = true;

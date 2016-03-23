@@ -10,6 +10,7 @@
 #import "Status.h"
 #import "User.h"
 #import "IconView.h"
+#import "ImageListView.h"
 
 @implementation StatusCellFrame
 - (void)setStatus:(Status *)status {
@@ -58,10 +59,12 @@
     CGSize textSize = [status.text boundingRectWithSize:CGSizeMake(cellWidth - kCellBorderWidth * 2, MAXFLOAT) options:options attributes:[NSDictionary dictionaryWithObjectsAndKeys:kTextFont, NSFontAttributeName, nil] context:nil].size;
     _textFrame = (CGRect){{textX, textY}, textSize};
     
-    if (status.picUrls.count) { // 6.有配图
-        CGFloat imageX = textX;
-        CGFloat imageY = CGRectGetMaxY(_textFrame) + kCellBorderWidth;
-        _imageFrame    = CGRectMake(imageX, imageY, 100, 100);
+    NSInteger imageListCount = status.picUrls.count;
+    if (imageListCount) { // 6.有配图
+        CGFloat imageX   = textX;
+        CGFloat imageY   = CGRectGetMaxY(_textFrame) + kCellBorderWidth;
+        CGSize imageSize = [ImageListView imageListSizeWithCuont:imageListCount];
+        _imageFrame      = CGRectMake(imageX, imageY, imageSize.width, imageSize.height);
     } else if (status.retweetedStatus) { // 7.有被转发的微博
         // 被转发微博整体
         CGFloat retweetedX      = textX;
@@ -72,7 +75,7 @@
         // 8.被转发微博的昵称
         CGFloat retweetedScreenNameX   = kCellBorderWidth;
         CGFloat retweetedScreenNameY   = kCellBorderWidth;
-        CGSize retweetedScreenNameSize = [status.retweetedStatus.user.screenName sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kRetweetedScreenNameFont, NSFontAttributeName, nil]];
+        CGSize retweetedScreenNameSize = [[NSString stringWithFormat:@"@%@", status.retweetedStatus.user.screenName] sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kRetweetedScreenNameFont, NSFontAttributeName, nil]];
         _retweetedScreenNameFrame = (CGRect){{retweetedScreenNameX, retweetedScreenNameY}, retweetedScreenNameSize};
         
         // 9.被转发微博的内容
@@ -82,10 +85,12 @@
         _retweetedTextFrame = (CGRect){{retweetedTextX, retweetedTextY}, retweetedTextSize};
         
         // 10.被转发微博的配图
-        if (status.retweetedStatus.picUrls.count) {
-            CGFloat retweetedImageX = retweetedTextX;
-            CGFloat retweetedImageY = CGRectGetMaxY(_retweetedTextFrame) + kCellBorderWidth;
-            _retweetedImageFrame    = CGRectMake(retweetedImageX, retweetedImageY, 100, 100);
+        NSInteger retweetedImageListCount = status.retweetedStatus.picUrls.count;
+        if (retweetedImageListCount) {
+            CGFloat retweetedImageX   = retweetedTextX;
+            CGFloat retweetedImageY   = CGRectGetMaxY(_retweetedTextFrame) + kCellBorderWidth;
+            CGSize retweetedImageSize = [ImageListView imageListSizeWithCuont:retweetedImageListCount];
+            _retweetedImageFrame      = CGRectMake(retweetedImageX, retweetedImageY, retweetedImageSize.width, retweetedImageSize.height);
             retweetedHeight += CGRectGetMaxY(_retweetedImageFrame);
         } else {
             retweetedHeight += CGRectGetMaxY(_retweetedTextFrame);
