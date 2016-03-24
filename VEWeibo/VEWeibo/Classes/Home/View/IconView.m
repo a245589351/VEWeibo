@@ -8,7 +8,7 @@
 
 #import "IconView.h"
 #import "User.h"
-#import "UIImageView+WebCache.h"
+#import "HttpTool.h"
 
 @interface IconView () {
     UIImageView *_icon;   // 用户头像
@@ -39,7 +39,7 @@
     _user = user;
     
     // 1.设置用户头像图片
-    [_icon sd_setImageWithURL:[NSURL URLWithString:user.profileImageUrl] placeholderImage:[UIImage imageNamed:_placeHolder] options:SDWebImageRetryFailed | SDWebImageLowPriority];
+    [HttpTool downloadImage:user.profileImageUrl place:[UIImage imageNamed:_placeHolder] imageView:_icon];
     
     // 2.设置右下角认证图标
     NSString *verifiedIcon = nil;

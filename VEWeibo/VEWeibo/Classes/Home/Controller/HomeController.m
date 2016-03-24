@@ -12,7 +12,6 @@
 #import "AccountTool.h"
 #import "Status.h"
 #import "User.h"
-#import "UIImageView+WebCache.h"
 #import "StatusCellFrame.h"
 #import "StatusCell.h"
 

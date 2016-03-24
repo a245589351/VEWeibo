@@ -8,6 +8,7 @@
 
 #import "ImageListView.h"
 #import "UIImageView+WebCache.h"
+#import "ImageItemView.h"
 
 #define kCount 9
 
@@ -24,7 +25,7 @@
 - (id)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         for (NSInteger i = 0; i < kCount; i++) {
-            UIImageView *imageView = [[UIImageView alloc] init];
+            ImageItemView *imageView = [[ImageItemView alloc] init];
             [self addSubview:imageView];
         }
     }
@@ -36,7 +37,7 @@
     NSInteger count = imageUrls.count;
     for (NSInteger i = 0; i < kCount; i++) {
         // 1.取出对应位置的子控件
-        UIImageView *child = self.subviews[i];
+        ImageItemView *child = self.subviews[i];
         
         // 2.判断要不要显示图片
         if (i >= count) {
@@ -48,8 +49,7 @@
         child.hidden = NO;
         
         // 3.设置图片
-        NSURL *url = [NSURL URLWithString:imageUrls[i][@"thumbnail_pic"]];
-        [child sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Icon"] options:SDWebImageLowPriority | SDWebImageRetryFailed];
+        child.url = imageUrls[i][@"thumbnail_pic"];
             
         // 4.设置frame
         if (count == 1) {

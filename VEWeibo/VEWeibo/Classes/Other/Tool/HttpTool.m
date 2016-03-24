@@ -8,6 +8,7 @@
 
 #import "HttpTool.h"
 #import "AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "AccountTool.h"
 
 @implementation HttpTool
@@ -62,4 +63,9 @@
 + (void)postWithPath:(NSString *)path params:(NSMutableDictionary *)params success:(HttpSuccessBlock)success failure:(HttpFailureBlock)failure {
     [self requestWithPath:path params:params success:success failure:failure method:kRequestMethodPost];
 }
+
++ (void)downloadImage:(NSString *)url place:(UIImage *)place imageView:(UIImageView *)imageView {
+    [imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:place options:SDWebImageLowPriority | SDWebImageRetryFailed];
+}
+
 @end

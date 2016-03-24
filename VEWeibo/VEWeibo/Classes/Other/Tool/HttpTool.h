@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef void (^HttpSuccessBlock)(id JSON);
 typedef void (^HttpFailureBlock)(NSError *error);
@@ -20,4 +21,6 @@ typedef enum {
 + (void)requestWithPath:(NSString *)path params:(NSMutableDictionary *)params success:(HttpSuccessBlock)success failure:(HttpFailureBlock)failure method:(RequestMethod)method;
 + (void)getWithPath:(NSString *)path params:(NSMutableDictionary *)params success:(HttpSuccessBlock)success failure:(HttpFailureBlock)failure;
 + (void)postWithPath:(NSString *)path params:(NSMutableDictionary *)params success:(HttpSuccessBlock)success failure:(HttpFailureBlock)failure;
+
++ (void)downloadImage:(NSString *)url place:(UIImage *)place imageView:(UIImageView *)imageView;
 @end
