@@ -30,7 +30,7 @@
     _url = url;
     
     // 1.下载图片
-    [HttpTool downloadImage:url place:[UIImage imageNamed:@"Icon"] imageView:self];
+    [HttpTool downloadImage:url place:[UIImage imageNamed:@"timeline_image_loading"] imageView:self];
     
     // 2.判断是否为gif
     _gifImage.hidden = ![url.lowercaseString hasSuffix:@"gif"];

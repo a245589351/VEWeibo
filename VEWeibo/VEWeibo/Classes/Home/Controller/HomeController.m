@@ -38,13 +38,16 @@
 - (void)buildUI {
     // 1.设置标题
     self.title = @"首页";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = kGlobalBg;
     
     // 2.左边的item
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithIcon:@"navigationbar_compose.png" highLightedIcon:@"navigationbar_compose_highlighted.png" addTarget:self action:@selector(sendStatus)];
     
     // 3.右边的item
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithIcon:@"navigationbar_pop.png" highLightedIcon:@"navigationbar_pop_highlighted.png" addTarget:self action:@selector(sendStatus)];
+    
+    // 4.设置cell的底部不显示分割线
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 #pragma mark - 获得用户的微博数据
@@ -98,6 +101,11 @@
 #pragma mark - 返回每一行cell的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [_statuseFrames[indexPath.row] cellHeight];
+}
+
+#pragma mark 选中后取消选中状态
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

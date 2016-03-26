@@ -40,8 +40,17 @@
         
         // 2.添加被转发微博的自控件
         [self addReWeetedAllSubviews];
+        
+        // 3.设置背景
+        [self setBg];
     }
     return self;
+}
+
+- (void)setBg {
+    UIImageView *bg = [[UIImageView alloc] init];
+    bg.backgroundColor = kStatusCellSelectBackgroudColor;
+    self.selectedBackgroundView = bg;
 }
 
 #pragma mark - 添加微博的自控件
@@ -181,6 +190,12 @@
     } else {
         _retweeted.hidden = YES;
     }
+}
+
+- (void)setFrame:(CGRect)frame {
+    frame.origin.y    += kTableBorderWidth;
+    frame.size.height -= kCellMargin;
+    [super setFrame:frame];
 }
 
 @end

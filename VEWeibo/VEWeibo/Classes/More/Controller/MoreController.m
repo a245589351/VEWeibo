@@ -70,7 +70,7 @@
 #pragma mark 设置TableView属性
 - (void)buildTableView {
     // 1.设置背景
-    self.tableView.backgroundColor = [UIColor colorWithRed:234/255.0 green:234/255.0 blue:234/255.0 alpha:1];
+    self.tableView.backgroundColor = kGlobalBg;
     
     // 2.设置TableView头部高度
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.bounds.size.width, 20)];
@@ -89,6 +89,9 @@
     
     // 增加底部额外的滚动区域
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
+    
+    self.tableView.layoutMargins  = UIEdgeInsetsZero;
+    self.tableView.separatorInset = UIEdgeInsetsZero;
 }
 
 #pragma mark - Table view data source
@@ -107,6 +110,9 @@
     if (cell == nil) {
         cell = [[GroupCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.myTableView = tableView;
+        
+        cell.layoutMargins  = UIEdgeInsetsZero;
+        cell.separatorInset = UIEdgeInsetsZero;
     }
     
     // 2.取出这行对应的字典数据

@@ -67,9 +67,9 @@
         _imageFrame      = CGRectMake(imageX, imageY, imageSize.width, imageSize.height);
     } else if (status.retweetedStatus) { // 7.有被转发的微博
         // 被转发微博整体
-        CGFloat retweetedX      = textX;
+        CGFloat retweetedX      = 0;
         CGFloat retweetedY      = CGRectGetMaxY(_textFrame) + kCellBorderWidth;
-        CGFloat retweetedWidth  = cellWidth - 2 * kCellBorderWidth;
+        CGFloat retweetedWidth  = cellWidth;
         CGFloat retweetedHeight = kCellBorderWidth;
         
         // 8.被转发微博的昵称
@@ -100,7 +100,7 @@
     }
     
     // 11.整个cell的高度
-    _cellHeight = kCellBorderWidth;
+    _cellHeight = kCellBorderWidth + kCellMargin;
     if (status.picUrls.count) {
         _cellHeight += CGRectGetMaxY(_imageFrame);
     } else if (status.retweetedStatus) {

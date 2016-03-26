@@ -25,6 +25,10 @@
 
 // 3.设置cell的边框宽度
 #define kCellBorderWidth 10
+// 表格间距
+#define kTableBorderWidth 10
+// 设置每个cell之间的间距
+#define kCellMargin 10
 
 // 4.cell内部子控件字体设置
 #define kScreenNameFont [UIFont systemFontOfSize:17]
@@ -65,5 +69,12 @@
 #define kMBIconW 14
 #define kMBIconH 14
 
+// 主页背景色
+#define kGlobalBg kColor(246, 246, 246)
+
 // 8.被转发微博的背景颜色
-#define kRetweetedBackgroundColor kColor(246, 246, 246)
+#define kRetweetedBackgroundColor kGlobalBg
+
+#define kStatusCellSelectBackgroudColor kColor(240, 240, 240)
+
+
