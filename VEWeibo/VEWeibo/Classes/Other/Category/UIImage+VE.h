@@ -17,4 +17,7 @@
 
 #pragma mark 自由拉伸的图片
 + (UIImage *)resizedImage:(NSString *)imgName xPost:(CGFloat)xPost yPost:(CGFloat)yPost;
+
+#pragma mark - 将颜色转为背景图片
++ (UIImage *)imageWithColor:(UIColor *)color;
 @end

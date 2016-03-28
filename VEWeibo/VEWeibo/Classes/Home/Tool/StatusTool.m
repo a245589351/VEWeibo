@@ -14,9 +14,13 @@
 
 @implementation StatusTool
 
-+ (void)statusesWithSuccess:(StatusSuccessBlock)success failure:(StatusFailureBlock)failure {
++ (void)statusesWithSinceId:(long long)sinceId maxId:(long long)maxId success:(StatusSuccessBlock)success failure:(StatusFailureBlock)failure {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"count"]    = @5;
+    params[@"since_id"] = @(sinceId);
+    params[@"max_id"]   = @(maxId);
     // 获取微博数据
-    [HttpTool getWithPath:kHomeTimeline params:nil success:^(id JSON) {
+    [HttpTool getWithPath:kHomeTimeline params:params success:^(id JSON) {
         if (success == nil) {
             return ;
         }

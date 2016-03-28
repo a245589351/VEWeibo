@@ -29,6 +29,8 @@
 #define kTableBorderWidth 10
 // 设置每个cell之间的间距
 #define kCellMargin 10
+// 设置微博dock的高度
+#define kStatusDockHeight 35
 
 // 4.cell内部子控件字体设置
 #define kScreenNameFont [UIFont systemFontOfSize:17]
@@ -40,7 +42,8 @@
 #define kRetweetedTextFont       [UIFont systemFontOfSize:16]
 
 // 5.获得rgb颜色
-#define kColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+#define kColor(r, g, b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+#define kColorA(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
 
 // 6.cell子控件的字体颜色设置
 // 会员昵称颜色
@@ -74,7 +77,11 @@
 
 // 8.被转发微博的背景颜色
 #define kRetweetedBackgroundColor kGlobalBg
+// 微博cell被选中的颜色
+#define kStatusCellSelectBackgroundColor kColor(240, 240, 240)
+// 微博底部操作条的选中背景颜色
+#define kStatusDockSelectBackgroundColor kStatusCellSelectBackgroundColor
 
-#define kStatusCellSelectBackgroudColor kColor(240, 240, 240)
+
 
 

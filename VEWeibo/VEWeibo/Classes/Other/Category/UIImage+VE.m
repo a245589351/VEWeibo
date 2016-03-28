@@ -28,4 +28,19 @@
     UIImage *image = [UIImage imageNamed:imgName];
     return [image stretchableImageWithLeftCapWidth:image.size.width * xPost topCapHeight:image.size.height * yPost];
 }
+
+#pragma mark - 将颜色转为背景图片
++ (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 @end

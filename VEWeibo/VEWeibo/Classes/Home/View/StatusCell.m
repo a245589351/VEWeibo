@@ -11,8 +11,8 @@
 #import "Status.h"
 #import "User.h"
 #import "IconView.h"
-#import "UIImageView+WebCache.h"
 #import "ImageListView.h"
+#import "StatusDock.h"
 
 @interface StatusCell () {
     IconView *_icon;       // 头像
@@ -22,6 +22,7 @@
     UILabel *_source;      // 来源
     UILabel *_text;        // 内容
     ImageListView *_image; // 配图
+    StatusDock *_dock;     // 微博底部操作条
     
     UIImageView *_retweeted;        // 被添加微博的父控件
     UILabel *_retweetedScreenName;  // 被转发微博的用户昵称
@@ -35,10 +36,10 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        // 1.添加微博的自控件
+        // 1.添加微博的子控件
         [self addAllSubviews];
         
-        // 2.添加被转发微博的自控件
+        // 2.添加被转发微博的子控件
         [self addReWeetedAllSubviews];
         
         // 3.设置背景
@@ -49,7 +50,7 @@
 
 - (void)setBg {
     UIImageView *bg = [[UIImageView alloc] init];
-    bg.backgroundColor = kStatusCellSelectBackgroudColor;
+    bg.backgroundColor = kStatusCellSelectBackgroundColor;
     self.selectedBackgroundView = bg;
 }
 
@@ -88,6 +89,10 @@
     // 6.配图
     _image = [[ImageListView alloc] init];
     [self.contentView addSubview:_image];
+    
+    // 7.添加操作条
+    _dock = [[StatusDock alloc] init];
+    [self.contentView addSubview:_dock];
 }
 
 #pragma mark - 添加被转发微博的自控件
@@ -118,6 +123,9 @@
     _statusCellFrame = statusCellFrame;
     
     Status *s = statusCellFrame.status;
+    
+    // 设置dock的微博数据
+    _dock.status = s;
     
     // 1.头像
     _icon.type  = kIconTypeSmall;

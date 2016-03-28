@@ -11,6 +11,7 @@
 @class User;
 @interface Status : NSObject
 
+@property (nonatomic, assign) long long statusId;// 微博id
 @property (nonatomic, copy  ) NSString  *text;// 微博内容
 @property (nonatomic, strong) User      *user;// 用户对象
 @property (nonatomic, strong) NSArray   *picUrls;// 微博图片
