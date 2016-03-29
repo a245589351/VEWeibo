@@ -21,6 +21,7 @@
     
     // 设置导航栏文字主题
     [bar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
+    bar.backgroundColor = [UIColor whiteColor];
     
     // 2.修改所有UIbarButtonItem的主题
 //    UIBarButtonItem *barItem = [UIBarButtonItem appearance];
@@ -34,6 +35,7 @@
     
     // 3.设置状态栏样式
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
 }
 
 @end

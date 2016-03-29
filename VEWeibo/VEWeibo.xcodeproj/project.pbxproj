@@ -180,6 +180,7 @@
 		719EC98A1CA03AF30091B233 /* common_icon_membership_expired.png in Resources */ = {isa = PBXBuildFile; fileRef = 719EC9741CA03AF30091B233 /* common_icon_membership_expired.png */; };
 		719EC98B1CA03AF30091B233 /* common_icon_membership_expired@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 719EC9751CA03AF30091B233 /* common_icon_membership_expired@2x.png */; };
 		71A0DED21CA2BEF50030ADC7 /* ImageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A0DED11CA2BEF50030ADC7 /* ImageListView.m */; };
+		71A615EA1CA962FE004C1826 /* StatusDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A615E81CA962FE004C1826 /* StatusDetailController.m */; };
 		71CF9A2F1C9D6FA200D6DF95 /* OauthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CF9A2E1C9D6FA200D6DF95 /* OauthController.m */; };
 		71CF9A311C9D73EB00D6DF95 /* Weibocfg.h in Resources */ = {isa = PBXBuildFile; fileRef = 71CF9A301C9D73EB00D6DF95 /* Weibocfg.h */; };
 		71CF9A481C9D81FE00D6DF95 /* NSString+VE.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CF9A341C9D81FD00D6DF95 /* NSString+VE.m */; };
@@ -483,6 +484,8 @@
 		719EC9751CA03AF30091B233 /* common_icon_membership_expired@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "common_icon_membership_expired@2x.png"; sourceTree = "<group>"; };
 		71A0DED01CA2BEF50030ADC7 /* ImageListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageListView.h; sourceTree = "<group>"; };
 		71A0DED11CA2BEF50030ADC7 /* ImageListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageListView.m; sourceTree = "<group>"; };
+		71A615E71CA962FE004C1826 /* StatusDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusDetailController.h; sourceTree = "<group>"; };
+		71A615E81CA962FE004C1826 /* StatusDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusDetailController.m; sourceTree = "<group>"; };
 		71CF62041C984BEA0074F72D /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		71CF62061C984DC80074F72D /* VEWeiboPrefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VEWeiboPrefix.pch; sourceTree = SOURCE_ROOT; };
 		71CF9A2D1C9D6FA200D6DF95 /* OauthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OauthController.h; sourceTree = "<group>"; };
@@ -1035,6 +1038,23 @@
 			path = Avatar;
 			sourceTree = "<group>";
 		};
+		71A615E51CA94159004C1826 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				71A615E61CA94159004C1826 /* Controller */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		71A615E61CA94159004C1826 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				71A615E71CA962FE004C1826 /* StatusDetailController.h */,
+				71A615E81CA962FE004C1826 /* StatusDetailController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		71CF9A2B1C9D6F5F00D6DF95 /* Oauth */ = {
 			isa = PBXGroup;
 			children = (
@@ -1237,6 +1257,7 @@
 		71E8485F1C9702BC00A66D53 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				71A615E51CA94159004C1826 /* Detail */,
 				71CF9A2B1C9D6F5F00D6DF95 /* Oauth */,
 				7188D5091C9ADC9D00A5B8F8 /* Square */,
 				7188D5071C9ADC9600A5B8F8 /* Me */,
@@ -1651,6 +1672,7 @@
 				7184C5871C9E61BC00AD70AA /* StatusTool.m in Sources */,
 				71157D141CA7E45600A09AFB /* MJRefreshAutoStateFooter.m in Sources */,
 				71157D0E1CA7E45600A09AFB /* MJRefreshBackFooter.m in Sources */,
+				71A615EA1CA962FE004C1826 /* StatusDetailController.m in Sources */,
 				7184C5B61C9E9FCA00AD70AA /* UIImage+GIF.m in Sources */,
 				7184C5B41C9E9FCA00AD70AA /* SDWebImagePrefetcher.m in Sources */,
 				718807991C999F2100E5A52C /* MoreController.m in Sources */,

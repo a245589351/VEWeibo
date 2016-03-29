@@ -15,14 +15,16 @@
 #import "StatusCellFrame.h"
 #import "StatusCell.h"
 #import "MJRefresh.h"
+#import "StatusDetailController.h"
 
-@interface HomeController () {
+@interface HomeController () <UITableViewDelegate> {
     NSMutableArray *_statuseFrames;
 }
 
 @end
 
 @implementation HomeController
+kHideScroll
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -140,7 +142,6 @@
     // 1.设置标题
     self.title = @"首页";
     self.view.backgroundColor = kGlobalBg;
-    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     
     // 2.左边的item
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithIcon:@"navigationbar_compose.png" highLightedIcon:@"navigationbar_compose_highlighted.png" addTarget:self action:@selector(sendStatus)];
@@ -186,9 +187,12 @@
     return [_statuseFrames[indexPath.row] cellHeight];
 }
 
-#pragma mark 选中后取消选中状态
+#pragma mark - 监听cell的点击
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    StatusDetailController *detail = [[StatusDetailController alloc] init];
+    [self.navigationController pushViewController:detail animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

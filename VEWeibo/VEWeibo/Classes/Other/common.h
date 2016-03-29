@@ -82,6 +82,7 @@
 // 微博底部操作条的选中背景颜色
 #define kStatusDockSelectBackgroundColor kStatusCellSelectBackgroundColor
 
-
+// 9.去除滚动条
+#define kHideScroll - (void)viewDidAppear:(BOOL)animated {}
 
 

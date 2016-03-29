@@ -32,6 +32,7 @@
 @end
 
 @implementation MoreController
+kHideScroll
 
 - (void)viewDidLoad {
     [super viewDidLoad];

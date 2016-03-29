@@ -20,4 +20,6 @@
 - (void)addItemWithIcon:(NSString *)icon selectedIcon:(NSString *)selected title:(NSString *)title;
 
 @property (nonatomic, weak) id<DockDelegate> delegate;
+@property (nonatomic, assign) NSInteger selectedIndex;
+
 @end

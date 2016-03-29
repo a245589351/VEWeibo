@@ -59,6 +59,8 @@
     
     // 4.赋值
     _selectedItem = item;
+    
+    _selectedIndex = _selectedItem.tag;
 }
 
 @end
