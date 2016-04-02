@@ -9,6 +9,9 @@
 #ifndef common_h
 #define common_h
 
+#define MAS_SHORTHAND //use Masonry without the 'mas_' prefix
+#define MAS_SHORTHAND_GLOBALS //enable auto-boxing for default syntax
+
 // 1.判断是否为iphone5的宏
 #define iPhone5 ([UIScreen mainScreen].bounds.size.height == 568)
 
@@ -30,20 +33,20 @@
 // 设置每个cell之间的间距
 #define kCellMargin 10
 // 设置微博dock的高度
-#define kStatusDockHeight 35
+#define kStatusDockHeight 25
 
 // 4.cell内部子控件字体设置
-#define kScreenNameFont [UIFont systemFontOfSize:17]
-#define kTimeFont       [UIFont systemFontOfSize:13]
+#define kScreenNameFont [UIFont systemFontOfSize:15]
+#define kTimeFont       [UIFont systemFontOfSize:11]
 #define kSourceFont     kTimeFont
-#define kTextFont       [UIFont systemFontOfSize:15]
+#define kTextFont       [UIFont systemFontOfSize:13]
 
-#define kRetweetedScreenNameFont [UIFont systemFontOfSize:16]
-#define kRetweetedTextFont       [UIFont systemFontOfSize:16]
+#define kRetweetedScreenNameFont [UIFont systemFontOfSize:13]
+#define kRetweetedTextFont       [UIFont systemFontOfSize:13]
 
 // 5.获得rgb颜色
-#define kColor(r, g, b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 #define kColorA(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
+#define kColor(r, g, b)     kColorA((r), (g), (b), 1)
 
 // 6.cell子控件的字体颜色设置
 // 会员昵称颜色

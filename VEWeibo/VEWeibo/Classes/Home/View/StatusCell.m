@@ -13,6 +13,7 @@
 #import "IconView.h"
 #import "ImageListView.h"
 #import "StatusDock.h"
+#import "Masonry.h"
 
 @interface StatusCell () {
     IconView *_icon;       // 头像
@@ -93,6 +94,9 @@
     // 7.添加操作条
     _dock = [[StatusDock alloc] init];
     [self.contentView addSubview:_dock];
+    [_dock mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.contentView).with.offset(-(kStatusDockHeight + 2));
+    }];
 }
 
 #pragma mark - 添加被转发微博的自控件

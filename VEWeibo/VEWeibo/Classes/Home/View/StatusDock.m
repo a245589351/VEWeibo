@@ -23,7 +23,6 @@
 - (id)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         // 固定dock的位置
-        self.autoresizingMask       = UIViewAutoresizingFlexibleTopMargin;
         self.userInteractionEnabled = YES;
         
         // 设置整个dock的背景色
@@ -89,7 +88,6 @@
     
     // 3.设置赞
     [self setBtn:_attitude title:@"赞" count:status.attitudesCount];
-    status.repostsCount = 10000;
 }
 
 - (void)setBtn:(UIButton *)btn title:(NSString *)title count:(NSInteger)count {
