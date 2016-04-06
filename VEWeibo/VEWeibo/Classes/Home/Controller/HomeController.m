@@ -176,7 +176,7 @@ kHideScroll
         cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    cell.statusCellFrame = _statuseFrames[indexPath.row];
+    cell.cellFrame = _statuseFrames[indexPath.row];
     
     return cell;
 }
@@ -191,8 +191,9 @@ kHideScroll
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     StatusDetailController *detail = [[StatusDetailController alloc] init];
+    StatusCellFrame *f = _statuseFrames[indexPath.row];
+    detail.status      = f.status;
     [self.navigationController pushViewController:detail animated:YES];
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

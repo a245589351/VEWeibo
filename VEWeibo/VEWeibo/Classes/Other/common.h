@@ -33,7 +33,9 @@
 // 设置每个cell之间的间距
 #define kCellMargin 10
 // 设置微博dock的高度
-#define kStatusDockHeight 25
+#define kStatusDockHeight 30
+// 转发微博dock的高度
+#define kReweetedDockHeight 30
 
 // 4.cell内部子控件字体设置
 #define kScreenNameFont [UIFont systemFontOfSize:15]
