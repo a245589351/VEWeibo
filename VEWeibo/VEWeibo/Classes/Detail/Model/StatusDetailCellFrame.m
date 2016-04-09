@@ -15,7 +15,7 @@
     
     if (status.retweetedStatus) {
         _retweetedFrame.size.height += kReweetedDockHeight;
-        _cellHeight += kReweetedDockHeight;
+        _cellHeight += kReweetedDockHeight - kCellBorderWidth - kCellMargin;
     }
 }
 @end

@@ -9,6 +9,7 @@
 #import "StatusDetailController.h"
 #import "StatusDetailCell.h"
 #import "StatusDetailCellFrame.h"
+#import "DetailHeader.h"
 
 @interface StatusDetailController () {
     StatusDetailCellFrame *_detailFrame;
@@ -23,6 +24,7 @@ kHideScroll
     [super viewDidLoad];
     
     self.title = @"微博正文";
+    self.tableView.backgroundColor = kGlobalBg;
     
     _detailFrame = [[StatusDetailCellFrame alloc] init];
     _detailFrame.status = _status;
@@ -46,7 +48,7 @@ kHideScroll
     if (section == 0) {
         return 1;
     }
-    return 5;
+    return 50;
 }
 
 #pragma mark - 返回cell的高度
@@ -86,7 +88,17 @@ kHideScroll
     if (section == 0) {
         return nil;
     }
-    return [UIButton buttonWithType:UIButtonTypeContactAdd];
+    DetailHeader *header = [[DetailHeader alloc] init];
+    header.status = _status;
+    return header;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 10;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section;
 }
 
 @end

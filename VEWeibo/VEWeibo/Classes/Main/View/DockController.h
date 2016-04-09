@@ -13,4 +13,6 @@
     Dock *_dock;
 }
 
+@property (nonatomic, readonly) UIViewController *selectedController;
+
 @end

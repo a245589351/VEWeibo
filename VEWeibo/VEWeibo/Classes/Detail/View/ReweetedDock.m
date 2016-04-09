@@ -84,7 +84,7 @@
     } else if (count > 0) { // 一万以内
         str = [NSString stringWithFormat:@"%ld", count];
     } else { // 没有
-        str = @"转发";
+        str = title;
     }
     [btn setTitle:str forState:UIControlStateNormal];
 }

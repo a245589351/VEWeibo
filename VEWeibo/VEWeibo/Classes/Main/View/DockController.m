@@ -51,6 +51,8 @@
     
     // 2.添加新控制器的view到MainController上
     [self.view addSubview:newVc.view];
+    
+    _selectedController = newVc;
 }
 
 @end
