@@ -11,12 +11,13 @@
 #import "Weibocfg.h"
 #import "AccountTool.h"
 #import "Status.h"
+#import "Comment.h"
 
 @implementation StatusTool
 
 + (void)statusesWithSinceId:(long long)sinceId maxId:(long long)maxId success:(StatusSuccessBlock)success failure:(StatusFailureBlock)failure {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"count"]    = @5;
+    params[@"count"]    = @50;
     params[@"since_id"] = @(sinceId);
     params[@"max_id"]   = @(maxId);
     // 获取微博数据
@@ -34,6 +35,66 @@
         
         // 回调block
         success(statuses);
+    } failure:^(NSError *error) {
+        if (failure == nil) {
+            return ;
+        }
+        failure(error);
+    }];
+}
+
++ (void)CommentsWithSinceId:(long long)sinceId maxId:(long long)maxId statusId:(long long)statusId success:(CommentsSuccessBlock)success failure:(CommentsFailureBlock)failure {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"id"]       = @(statusId);
+    params[@"since_id"] = @(sinceId);
+    params[@"max_id"]   = @(maxId);
+    // 获取微博数据
+    [HttpTool getWithPath:kCommentsShow params:params success:^(id JSON) {
+        if (success == nil) {
+            return ;
+        }
+        
+        // 微博评论(JSON数组)
+        NSArray *array = JSON[@"comments"];
+        
+        NSMutableArray *comments = [NSMutableArray array];
+        
+        for (NSDictionary *dict in array) {
+            Comment *c = [[Comment alloc] initWithDict:dict];
+            [comments addObject:c];
+        }
+        
+        success(comments);
+    } failure:^(NSError *error) {
+        if (failure == nil) {
+            return ;
+        }
+        failure(error);
+    }];
+}
+
++ (void)repostsWithSinceId:(long long)sinceId maxId:(long long)maxId statusId:(long long)statusId success:(RepostsSuccessBlock)success failure:(RepostsFailureBlock)failure {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"id"]       = @(statusId);
+    params[@"since_id"] = @(sinceId);
+    params[@"max_id"]   = @(maxId);
+    // 获取微博数据
+    [HttpTool getWithPath:kStatusesRepostTimeline params:params success:^(id JSON) {
+        if (success == nil) {
+            return ;
+        }
+        
+        // 转发微博(JSON数组)
+        NSArray *array = JSON[@"reposts"];
+        
+        NSMutableArray *reposts = [NSMutableArray array];
+        
+        for (NSDictionary *dict in array) {
+            Status *r = [[Status alloc] initWithDict:dict];
+            [reposts addObject:r];
+        }
+        
+        success(reposts);
     } failure:^(NSError *error) {
         if (failure == nil) {
             return ;

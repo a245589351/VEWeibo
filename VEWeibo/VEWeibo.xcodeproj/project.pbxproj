@@ -26,6 +26,7 @@
 		71157D1D1CA7E45600A09AFB /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 71157D081CA7E45600A09AFB /* UIScrollView+MJExtension.m */; };
 		71157D1E1CA7E45600A09AFB /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 71157D0A1CA7E45600A09AFB /* UIScrollView+MJRefresh.m */; };
 		71157D1F1CA7E45600A09AFB /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 71157D0C1CA7E45600A09AFB /* UIView+MJExtension.m */; };
+		7136567C1CB8C58800628EF7 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 7136567B1CB8C58800628EF7 /* Comment.m */; };
 		714152BC1CAFF27900E627AF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 714152A21CAFF27900E627AF /* Info.plist */; };
 		714152BD1CAFF27900E627AF /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 714152A41CAFF27900E627AF /* MASCompositeConstraint.m */; };
 		714152BE1CAFF27900E627AF /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 714152A71CAFF27900E627AF /* MASConstraint.m */; };
@@ -311,6 +312,8 @@
 		71157D0A1CA7E45600A09AFB /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		71157D0B1CA7E45600A09AFB /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		71157D0C1CA7E45600A09AFB /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		7136567A1CB8C58800628EF7 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		7136567B1CB8C58800628EF7 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		714152A21CAFF27900E627AF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		714152A31CAFF27900E627AF /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		714152A41CAFF27900E627AF /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
@@ -821,6 +824,8 @@
 			children = (
 				715B842D1CB0038C00F155D9 /* StatusDetailCellFrame.h */,
 				715B842E1CB0038C00F155D9 /* StatusDetailCellFrame.m */,
+				7136567A1CB8C58800628EF7 /* Comment.h */,
+				7136567B1CB8C58800628EF7 /* Comment.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1838,6 +1843,7 @@
 				71CF9A491C9D81FE00D6DF95 /* UIBarButtonItem+VE.m in Sources */,
 				71157D1E1CA7E45600A09AFB /* UIScrollView+MJRefresh.m in Sources */,
 				715B842F1CB0038C00F155D9 /* StatusDetailCellFrame.m in Sources */,
+				7136567C1CB8C58800628EF7 /* Comment.m in Sources */,
 				7184C5801C9E5C0A00AD70AA /* Status.m in Sources */,
 				71157D131CA7E45600A09AFB /* MJRefreshAutoNormalFooter.m in Sources */,
 				71157D111CA7E45600A09AFB /* MJRefreshHeader.m in Sources */,

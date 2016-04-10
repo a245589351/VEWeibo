@@ -94,7 +94,7 @@
     if (count >= 10000) { // 上万
         CGFloat cnt = count / 10000.0;
         str = [NSString stringWithFormat:@"%0.1f万", cnt];
-        str = [title stringByReplacingOccurrencesOfString:@".0" withString:@""];
+        str = [str stringByReplacingOccurrencesOfString:@".0" withString:@""];
     } else if (count > 0) { // 一万以内
         str = [NSString stringWithFormat:@"%ld", count];
     } else { // 没有

@@ -12,8 +12,21 @@
 typedef void (^StatusSuccessBlock)(NSArray *statuses);
 typedef void (^StatusFailureBlock)(NSError *error);
 
+typedef void (^CommentsSuccessBlock)(NSArray *comments);
+typedef void (^CommentsFailureBlock)(NSError *error);
+
+typedef void (^RepostsSuccessBlock)(NSArray *reposts);
+typedef void (^RepostsFailureBlock)(NSError *error);
+
 @interface StatusTool : NSObject
 
+// 抓取微博数据
 + (void)statusesWithSinceId:(long long)sinceId maxId:(long long)maxId success:(StatusSuccessBlock)success failure:(StatusFailureBlock)failure;
+
+// 抓取某条微博的评论数据
++ (void)CommentsWithSinceId:(long long)sinceId maxId:(long long)maxId statusId:(long long)statusId success:(CommentsSuccessBlock)success failure:(CommentsFailureBlock)failure;
+
+// 抓取某条微博的转发数据
++ (void)repostsWithSinceId:(long long)sinceId maxId:(long long)maxId statusId:(long long)statusId success:(RepostsSuccessBlock)success failure:(RepostsFailureBlock)failure;
 
 @end

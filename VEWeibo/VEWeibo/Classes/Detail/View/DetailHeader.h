@@ -8,9 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@class Status;
+@class Status, DetailHeader;
+
+typedef enum {
+    kDetailHeaderBtnTypeRepost, // 转发
+    kDetailHeaderBtnTypeComment // 评论
+} DetailHeaderBtnType;
+
+@protocol DetailHeaderDelegate <NSObject>
+@optional
+- (void) detailHeader:(DetailHeader *)header btnClick:(DetailHeaderBtnType)index;
+@end
+
 @interface DetailHeader : UIImageView
 
 @property (nonatomic, strong) Status *status;
+@property (nonatomic, weak) id<DetailHeaderDelegate> delegate;
 
 @end

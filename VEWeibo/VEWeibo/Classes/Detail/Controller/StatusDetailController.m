@@ -10,8 +10,10 @@
 #import "StatusDetailCell.h"
 #import "StatusDetailCellFrame.h"
 #import "DetailHeader.h"
+#import "StatusTool.h"
+#import "Status.h"
 
-@interface StatusDetailController () {
+@interface StatusDetailController () <DetailHeaderDelegate> {
     StatusDetailCellFrame *_detailFrame;
 }
 
@@ -89,7 +91,8 @@ kHideScroll
         return nil;
     }
     DetailHeader *header = [[DetailHeader alloc] init];
-    header.status = _status;
+    header.delegate      = self;
+    header.status        = _status;
     return header;
 }
 
@@ -101,4 +104,20 @@ kHideScroll
     return indexPath.section;
 }
 
+#pragma mark - DetailHeader的代理方法
+- (void)detailHeader:(DetailHeader *)header btnClick:(DetailHeaderBtnType)index {
+    if (index == kDetailHeaderBtnTypeRepost) { // 点击转发
+        [StatusTool repostsWithSinceId:0 maxId:0 statusId:_status.statusId success:^(NSArray *reposts) {
+            MyLog(@"获取转发数据%@", reposts);
+        } failure:^(NSError *error) {
+            nil;
+        }];
+    } else if (index == kDetailHeaderBtnTypeComment) { // 点击评论
+        [StatusTool CommentsWithSinceId:0 maxId:0 statusId:_status.statusId success:^(NSArray *comments) {
+            MyLog(@"获取评论数据%@", comments);
+        } failure:^(NSError *error) {
+            nil;
+        }];
+    }
+}
 @end

@@ -8,3 +8,9 @@
 #define kAuthorizeUrl    @"https://api.weibo.com/oauth2/authorize"
 #define kAccessTokenUrl  @"https://api.weibo.com/oauth2/access_token"
 #define kHomeTimeline    @"https://api.weibo.com/2/statuses/home_timeline.json"
+
+// 微博评论请求API
+#define kCommentsShow @"https://api.weibo.com/2/comments/show.json"
+
+// 获取指定微博的转发微博列表
+#define kStatusesRepostTimeline @"https://api.weibo.com/2/statuses/repost_timeline.json"

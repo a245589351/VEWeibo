@@ -34,6 +34,7 @@
         _repost   = [self addBtnWithTitle:@"0 转发"];
         _comment  = [self addBtnWithTitle:@"0 评论"];
         _attitude = [self addBtnWithTitle:@"0 赞"];
+        _attitude.enabled = NO;
         
         // 添加底部边框
         _border = [[UIImageView alloc] initWithImage:[UIImage imageWithColor:kColor(200, 199, 204)]];
@@ -116,14 +117,23 @@
 
 #pragma mark - 按钮点击
 - (void)btnClick:(UIButton *)btn {
+    // 控制状态
     _selectedBtn.enabled = YES;
     btn.enabled          = NO;
     _selectedBtn         = btn;
+    
+    // 移动指示器
     [UIView animateWithDuration:0.3 animations:^{
         CGPoint center = _hint.center;
         center.x       = btn.center.x;
         _hint.center   = center;
     }];
+    
+    // 通知代理
+    if ([_delegate respondsToSelector:@selector(detailHeader:btnClick:)]) {
+        DetailHeaderBtnType type = btn == _repost ? kDetailHeaderBtnTypeRepost : kDetailHeaderBtnTypeComment;
+        [_delegate detailHeader:self btnClick:type];
+    }
 }
 
 - (void)setStatus:(Status *)status {
@@ -144,7 +154,7 @@
     if (count >= 10000) { // 上万
         CGFloat cnt = count / 10000.0;
         str = [NSString stringWithFormat:@"%0.1f万 %@", cnt, title];
-        str = [title stringByReplacingOccurrencesOfString:@".0" withString:@""];
+        str = [str stringByReplacingOccurrencesOfString:@".0" withString:@""];
     } else { // 一万以内
         str = [NSString stringWithFormat:@"%ld %@", count, title];
     }
