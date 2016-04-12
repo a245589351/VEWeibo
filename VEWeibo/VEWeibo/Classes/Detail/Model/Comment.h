@@ -6,15 +6,8 @@
 //  Copyright © 2016年 apple. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BaseText.h"
 
-@class User;
-@interface Comment : NSObject
-
-@property (nonatomic, copy) NSString *createdAt;
-@property (nonatomic, copy) NSString *text;
-@property (nonatomic, strong) User *user;
-
-- (id)initWithDict:(NSDictionary *)dict;
+@interface Comment : BaseText
 
 @end

@@ -98,14 +98,6 @@
         make.width.equalTo(width);
     }];
     
-    // 指示器的位置
-    [_hint mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_comment.mas_centerX);
-        make.bottom.equalTo(self.mas_bottom).with.offset(0);
-        make.height.equalTo(@1);
-        make.width.equalTo(_repost);
-    }];
-    
     // 底部边框的位置
     [_border mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_repost.mas_bottom).with.offset(0);
@@ -127,11 +119,19 @@
         CGPoint center = _hint.center;
         center.x       = btn.center.x;
         _hint.center   = center;
+        [_hint mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(btn.mas_centerX);
+            make.bottom.equalTo(self.mas_bottom).with.offset(0);
+            make.height.equalTo(@1);
+            make.width.equalTo(_repost);
+        }];
     }];
+    
+    DetailHeaderBtnType type = btn == _repost ? kDetailHeaderBtnTypeRepost : kDetailHeaderBtnTypeComment;
+    _currentBtnType = type;
     
     // 通知代理
     if ([_delegate respondsToSelector:@selector(detailHeader:btnClick:)]) {
-        DetailHeaderBtnType type = btn == _repost ? kDetailHeaderBtnTypeRepost : kDetailHeaderBtnTypeComment;
         [_delegate detailHeader:self btnClick:type];
     }
 }

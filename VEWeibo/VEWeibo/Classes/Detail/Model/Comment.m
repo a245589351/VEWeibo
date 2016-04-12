@@ -7,17 +7,8 @@
 //
 
 #import "Comment.h"
-#import "User.h"
+#import "Status.h"
 
 @implementation Comment
-
-- (id)initWithDict:(NSDictionary *)dict {
-    if (self == [super init]) {
-        self.text     = dict[@"text"];
-        self.user     = [[User alloc] initWithDict:dict[@"user"]];
-        self.createdAt      = dict[@"created_at"];
-    }
-    return self;
-}
 
 @end

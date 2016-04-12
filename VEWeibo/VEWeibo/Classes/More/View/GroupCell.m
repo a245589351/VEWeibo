@@ -25,7 +25,7 @@
     if (self) {
         // 设置cell背景
         UIImageView *bg = [[UIImageView alloc] init];
-        bg.backgroundColor = [UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:0.3];
+        bg.backgroundColor = kColorA(231, 231, 231, 0.3);
         self.selectedBackgroundView = bg;
     }
     return self;

@@ -12,10 +12,10 @@
 typedef void (^StatusSuccessBlock)(NSArray *statuses);
 typedef void (^StatusFailureBlock)(NSError *error);
 
-typedef void (^CommentsSuccessBlock)(NSArray *comments);
+typedef void (^CommentsSuccessBlock)(NSArray *comments, int totalNumber, long long nextCursor);
 typedef void (^CommentsFailureBlock)(NSError *error);
 
-typedef void (^RepostsSuccessBlock)(NSArray *reposts);
+typedef void (^RepostsSuccessBlock)(NSArray *reposts, int totalNumber);
 typedef void (^RepostsFailureBlock)(NSError *error);
 
 @interface StatusTool : NSObject

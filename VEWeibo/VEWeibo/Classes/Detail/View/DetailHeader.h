@@ -25,4 +25,6 @@ typedef enum {
 @property (nonatomic, strong) Status *status;
 @property (nonatomic, weak) id<DetailHeaderDelegate> delegate;
 
+@property (nonatomic, assign, readonly) DetailHeaderBtnType currentBtnType;
+
 @end

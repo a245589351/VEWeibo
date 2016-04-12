@@ -48,6 +48,7 @@
     params[@"id"]       = @(statusId);
     params[@"since_id"] = @(sinceId);
     params[@"max_id"]   = @(maxId);
+    params[@"count"]   = @5;
     // 获取微博数据
     [HttpTool getWithPath:kCommentsShow params:params success:^(id JSON) {
         if (success == nil) {
@@ -64,7 +65,7 @@
             [comments addObject:c];
         }
         
-        success(comments);
+        success(comments, [JSON[@"total_number"] intValue], [JSON[@"next_cursor"] longLongValue]);
     } failure:^(NSError *error) {
         if (failure == nil) {
             return ;
@@ -94,7 +95,7 @@
             [reposts addObject:r];
         }
         
-        success(reposts);
+        success(reposts, [JSON[@"total_number"] intValue]);
     } failure:^(NSError *error) {
         if (failure == nil) {
             return ;
